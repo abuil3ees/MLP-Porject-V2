@@ -3,35 +3,34 @@ import streamlit as st
 # Apply custom CSS for green sliders and radio buttons
 st.markdown("""
     <style>
-        /* Make sliders green */
+        /* Slider track and handle styling */
         div[data-testid="stSlider"] > div > div {
-            background: linear-gradient(to right, #008000, #008000) !important; /* Green slider track */
+            background: linear-gradient(to right, #008000, #008000) !important; /* Green track */
         }
 
-        /* Make slider handles green */
         div[data-testid="stSlider"] > div > div > div {
-            background-color: #008000 !important; /* Green slider handle */
+            background-color: #008000 !important; /* Green handle */
         }
 
-        /* Make slider labels (min and max values) green */
-        div[data-testid="stSlider"] .css-1e5imcs {
-            color: #008000 !important; /* Green labels */
+        /* Radio button styling */
+        div[role="radiogroup"] input[type="radio"]:checked + div {
+            background-color: #008000 !important; /* Green selection dot */
         }
 
-        /* Make radio buttons green */
         div[role="radiogroup"] label div {
-            color: #008000 !important; /* Green text */
+            color: black !important; /* Black text */
+            background-color: transparent !important; /* Transparent background */
         }
 
-        /* Make radio button selection dots green */
-        div[role="radiogroup"] input:checked + div {
-            background-color: #008000 !important;
+        /* Ensure slider labels (1 and 10) are unaffected */
+        div[data-testid="stSlider"] .css-1e5imcs {
+            color: black !important; /* Black labels */
         }
     </style>
 """, unsafe_allow_html=True)
 
 # Display the logo at the top
-st.image("logo.png", width=150)  # Smaller logo
+st.image("logo.png", width=400)  # Smaller logo
 
 # Title of the app
 st.title("Leadership Readiness Tool")
