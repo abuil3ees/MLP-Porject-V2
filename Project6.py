@@ -6,12 +6,19 @@ st.markdown("""
         /* Make radio button selection dots green */
         div[role="radiogroup"] input:checked + div {
             background-color: #008000 !important; /* Green selection dot */
+            border-radius: 50%; /* Ensure the dot stays circular */
+        }
+
+        /* Ensure radio button text remains unaffected */
+        div[role="radiogroup"] label div {
+            color: black !important; /* Keep text black */
+            background-color: transparent !important; /* No background blocks */
         }
     </style>
 """, unsafe_allow_html=True)
 
 # Display the logo at the top
-st.image("logo.png", width=150)  # Smaller logo
+st.image("logo.png", width=400)  # Smaller logo
 
 # Title of the app
 st.title("Leadership Readiness Tool")
