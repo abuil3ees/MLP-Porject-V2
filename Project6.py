@@ -4,8 +4,18 @@ import streamlit as st
 st.markdown("""
     <style>
         /* Make sliders green */
-        .stSlider > div[role="slider"] {
-            background-color: #008000 !important; /* Green */
+        div[data-testid="stSlider"] > div > div {
+            background: linear-gradient(to right, #008000, #008000) !important; /* Green slider track */
+        }
+
+        /* Make slider handles green */
+        div[data-testid="stSlider"] > div > div > div {
+            background-color: #008000 !important; /* Green slider handle */
+        }
+
+        /* Make slider labels (min and max values) green */
+        div[data-testid="stSlider"] .css-1e5imcs {
+            color: #008000 !important; /* Green labels */
         }
 
         /* Make radio buttons green */
@@ -97,3 +107,35 @@ for behavior, questions in behaviors.items():
             responses[f"{behavior}_{i}"] = st.radio(q["question"], ["Yes", "No"], index=1)
         elif q["type"] == "Scale":
             responses[f"{behavior}_{i}"] = st.slider(q["question"], min_value=1, max_value=10, value=5)
+
+# Add a Submit button
+if st.button("Submit"):
+    total_score = 0
+    max_score = len(responses) * 10
+
+    # Calculate the total score
+    for key, value in responses.items():
+        if isinstance(value, str):  # Yes/No questions
+            total_score += 10 if value == "Yes" else 0
+        elif isinstance(value, int):  # Scale questions
+            total_score += value
+
+    # Calculate readiness score
+    readiness_score = (total_score / max_score) * 100
+
+    # Determine traffic light status and image
+    if readiness_score >= 80:
+        status = "Green - Ready to Proceed"
+        image_path = "green_light.png"
+    elif readiness_score >= 50:
+        status = "Yellow - Needs Improvement"
+        image_path = "yellow_light.png"
+    else:
+        status = "Red - Do Not Proceed"
+        image_path = "red_light.png"
+
+    # Display results in a pop-up style expander
+    with st.expander("View Results", expanded=True):
+        st.image(image_path, width=150)  # Smaller traffic light image
+        st.markdown(f"### Final Readiness Score: {readiness_score:.2f}%")
+        st.markdown(f"### Status: **{status}**")
