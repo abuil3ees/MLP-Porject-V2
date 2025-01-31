@@ -3,21 +3,16 @@ import streamlit as st
 # Apply custom CSS for green radio button selection dots
 st.markdown("""
     <style>
-        /* Ensure radio buttons remain visible */
-        div[role="radiogroup"] input[type="radio"] {
-            appearance: auto !important; /* Restore default radio button appearance */
-        }
-
-        /* Make the selection dot green when selected */
+        /* Make the radio button selection circle green */
         div[role="radiogroup"] input:checked + div {
-            background-color: #008000 !important; /* Green selection dot */
-            border-radius: 50%; /* Ensure circular dot */
+            background-color: #008000 !important; /* Green for selection circle */
+            border-radius: 50%; /* Ensure circular shape */
         }
 
         /* Keep the radio button text clean and unaffected */
         div[role="radiogroup"] label div {
-            color: black !important; /* Black text */
-            background-color: transparent !important; /* Transparent background */
+            color: black !important; /* Keep text black */
+            background-color: transparent !important; /* No background blocks */
         }
     </style>
 """, unsafe_allow_html=True)
